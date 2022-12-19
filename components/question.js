@@ -7,6 +7,7 @@ const Question = () => {
     question,
     setCorrect,
     correct,
+    setStreak,
   } = useContext(GlobalContext)
 
   const handleClick = (text, answer) => {
@@ -17,6 +18,7 @@ const Question = () => {
       console.log(r)
       console.log(question.correct)
       setCorrect(question.correct === r)
+      setStreak([true])
     })
   }
 

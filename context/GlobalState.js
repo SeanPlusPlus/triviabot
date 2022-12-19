@@ -13,6 +13,7 @@ const initialState = {
   modal: {},
   question: null,
   correct: null,
+  streak: [],
 }
 
 export const GlobalContext = createContext(initialState);
@@ -44,6 +45,13 @@ export const GlobalProvider = ({
     });
   }
 
+  function setStreak(data) {
+    dispatch({
+      type: 'UPDATE_STREAK',
+      payload: data
+    });
+  }
+
   useEffect(() => {
     log('state', 'rgb(217, 38, 169)', state);
   }, [state])
@@ -54,6 +62,7 @@ export const GlobalProvider = ({
         setModal,
         setQuestion,
         setCorrect,
+        setStreak,
       }
     } > {
       children

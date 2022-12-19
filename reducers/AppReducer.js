@@ -22,6 +22,11 @@ export default (state, action) => {
         ...state,
         correct: action.payload,
       }
+    case 'UPDATE_STREAK':
+      return {
+        ...state,
+        streak: action.payload,
+      }
     default:
       return state;
   }
