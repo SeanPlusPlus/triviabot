@@ -8,7 +8,8 @@ export default function handler(req, res) {
       {
         text: "Stoked"
       }
-    ]
+    ],
+    correct: null
   }
   res.status(200).json(data)
 }
