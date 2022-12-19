@@ -32,6 +32,11 @@ export default (state, action) => {
         ...state,
         debug: action.payload,
       }
+    case 'UPDATE_LOADING':
+      return {
+        ...state,
+        loading: action.payload,
+      }
     default:
       return state;
   }

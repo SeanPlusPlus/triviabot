@@ -8,19 +8,22 @@ import Question from './question'
 import Result from './result'
 import Streak from './streak'
 import Debug from './debug'
+import Loading from './loading'
 
 const Home = () => {
   const {
     setQuestion,
+    setLoading
   } = useContext(GlobalContext)
 
   useEffect(() => {
+    setLoading(true)
     const fetchData = async () => {
       const result = await axios(
         '/api/question',
       )
-
       setQuestion(result.data)
+      setLoading(false)
     }
 
     fetchData()
@@ -29,6 +32,7 @@ const Home = () => {
   return (
     <div className="text-center h-screen">
       <Streak />
+      <Loading />
       <Question />
       <Result />
       <Debug />

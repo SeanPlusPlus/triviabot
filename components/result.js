@@ -7,15 +7,18 @@ const Result = () => {
     correct,
     setQuestion,
     setCorrect,
+    setLoading,
   } = useContext(GlobalContext)
 
   const handleClick = () => {
     setCorrect(null)
+    setLoading(true)
     const fetchData = async () => {
       const result = await axios(
         '/api/question',
       )
       setQuestion(result.data)
+      setLoading(false)
     }
     fetchData()
   }

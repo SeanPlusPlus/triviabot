@@ -15,6 +15,7 @@ const initialState = {
   correct: null,
   streak: [],
   debug: null,
+  loading: null,
 }
 
 export const GlobalContext = createContext(initialState);
@@ -60,6 +61,13 @@ export const GlobalProvider = ({
     });
   }
 
+  function setLoading(data) {
+    dispatch({
+      type: 'UPDATE_LOADING',
+      payload: data
+    });
+  }
+
   useEffect(() => {
     log('state', 'rgb(217, 38, 169)', state);
   }, [state])
@@ -72,6 +80,7 @@ export const GlobalProvider = ({
         setCorrect,
         setStreak,
         setDebug,
+        setLoading,
       }
     } > {
       children

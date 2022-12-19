@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import axios from 'axios'
 import { GlobalContext } from '../context/GlobalState'
 
 const Debug = () => {
