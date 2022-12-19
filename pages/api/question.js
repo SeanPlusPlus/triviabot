@@ -26,10 +26,7 @@ const generateQuestion = async (req, res) => {
   try {
     const arr = output.text.trim().split('\n\n')
     const text = arr[0].split('Q: ')[1]
-    let answers = arr[1].split('\n').map((a) => ({text: a}))
-    if (answers.length !== 4) {
-      answers = arr[1].split(' ').map((a) => ({text: a}))
-    }
+    const answers = arr[1].split('\n').map((a) => ({text: a}))
     const answer = arr[2].split('Correct Answer: ')[1][0]
     const i = map[answer]
     const correct = crypto.createHash('sha512').update(text + answers[i].text).digest('hex')

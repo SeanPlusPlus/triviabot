@@ -17,7 +17,7 @@ const Debug = () => {
       <div className="mx-10 md:mx-24 lg:mx-48 xl:mx-96">
         <div className="text-left alert alert-warning rounded shadow-lg mb-5">
           <div>
-            <span>Ooofh! Something went wrong on our end. This is the question text our ai generated, and we were not able to parse it correctly. Major props if you screenshot this and send it to Sean.</span>
+            <span>Ooofh! Something went wrong on our end. Below is the output our ai generated, and unfortunately we were not able to parse it correctly. Major props if you screenshot this and send it to Sean.</span>
           </div>
         </div>
       </div>
