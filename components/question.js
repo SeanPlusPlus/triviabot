@@ -6,6 +6,7 @@ const Question = () => {
   const {
     question,
     setCorrect,
+    correct,
   } = useContext(GlobalContext)
 
   const handleClick = (text, answer) => {
@@ -32,7 +33,7 @@ const Question = () => {
         <div key={a.text} className="form-control">
           <label className="label cursor-pointer hover:bg-base-300 rounded" onClick={() => handleClick(question.text, a)}>
             <span className="label-text">{a.text}</span> 
-            <input type="radio" name="radio-10" className="radio checked:bg-blue-500" />
+            <input type="radio" name="radio-10" className="radio checked:bg-blue-500" disabled={correct} />
           </label>
         </div>
       ))}
