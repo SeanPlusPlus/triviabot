@@ -18,7 +18,7 @@ const About = () => {
       <div className="modal-box relative">
         <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-4 top-4" onClick={handleClose}>✕</label>
         <h3 className="font-bold text-xl flex">
-          <span className="ml-1 text-2xl pb-4">
+          <span className="text-2xl pb-4">
             {title}
           </span>
         </h3>
