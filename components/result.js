@@ -19,6 +19,7 @@ const Result = () => {
             <span>Correct</span>
           </div>
         </div>
+        <button className="btn mt-3 w-full">Next Question</button>
       </div>
     )
   } else {
