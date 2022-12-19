@@ -4,10 +4,10 @@ export default function handler(req, res) {
   const text = new Date() + ''
   const answers = [
     {
-      text: 'Dude'
+      text: 'Dude' + text
     },
     {
-      text: 'Stoked'
+      text: 'Stoked' + text
     }
   ]
   const i = 1

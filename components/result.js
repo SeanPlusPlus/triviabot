@@ -1,10 +1,24 @@
 import { useContext } from 'react'
+import axios from 'axios'
 import { GlobalContext } from '../context/GlobalState'
 
 const Result = () => {
   const {
     correct,
+    setQuestion,
+    setCorrect,
   } = useContext(GlobalContext)
+
+  const handleClick = () => {
+    setCorrect(null)
+    const fetchData = async () => {
+      const result = await axios(
+        '/api/question',
+      )
+      setQuestion(result.data)
+    }
+    fetchData()
+  }
 
   if (correct === null) {
     return <></>
@@ -19,7 +33,7 @@ const Result = () => {
             <span>Correct</span>
           </div>
         </div>
-        <button className="btn mt-4 w-full">Next Question</button>
+        <button className="btn mt-4 w-full" onClick={handleClick}>Next Question</button>
       </div>
     )
   } else {
