@@ -1,8 +1,9 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import { sha512 } from '../utils/crypto'
 
 const Question = () => {
+  const [flag, setFlag] = useState(false)
   const {
     question,
     setCorrect,
@@ -14,10 +15,22 @@ const Question = () => {
   const handleClick = (text, answer) => {
     const response = sha512(text + answer.text)
     response.then((r) => {
-      const s = question.correct === r
       const current = streak
-      setCorrect(s)
-      setStreak([...current, s])
+      const s = question.correct === r
+      if (s) {
+        setCorrect(s)
+        if (flag) {
+          setFlag(false)
+        } else {
+          setStreak([...current, s])
+        }
+      } else {
+        if (!flag) {
+          setCorrect(s)
+          setStreak([...current, s])
+          setFlag(true)
+        }
+      }
     })
   }
 
