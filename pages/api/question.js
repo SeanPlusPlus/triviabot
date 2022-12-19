@@ -21,8 +21,8 @@ const generateQuestion = async (req, res) => {
     max_tokens: 250,
   });
   
-  let data = {}
   const output = baseCompletion.data.choices.pop()
+  let data = { output }
   try {
     const arr = output.text.trim().split('\n\n')
     const text = arr[0].split('Q: ')[1]
@@ -34,10 +34,10 @@ const generateQuestion = async (req, res) => {
     const i = map[answer]
     const correct = crypto.createHash('sha512').update(text + answers[i].text).digest('hex')
     data = {
+      output,
       text,
       answers,
       correct,
-      output,
     }
   } catch(e) {
     data = { output }

@@ -24,9 +24,8 @@ const Home = () => {
         '/api/question',
       )
       setQuestion(result.data)
-      console.log('result.data', result.data)
       if (!result.data.text || !result.data.answers || !result.data.correct) {
-        setDebug(true)
+        setDebug(result.data)
       }
       setLoading(false)
     }

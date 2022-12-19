@@ -8,6 +8,7 @@ const Result = () => {
     setQuestion,
     setCorrect,
     setLoading,
+    setDebug,
   } = useContext(GlobalContext)
 
   const handleClick = () => {
@@ -19,6 +20,9 @@ const Result = () => {
         '/api/question',
       )
       setQuestion(result.data)
+      if (!result.data.text || !result.data.answers || !result.data.correct) {
+        setDebug(result.data)
+      }
       setLoading(false)
     }
     fetchData()
