@@ -3,7 +3,7 @@ import { GlobalContext } from '../context/GlobalState'
 
 const Debug = () => {
   const {
-    debug
+    debug,
   } = useContext(GlobalContext)
 
   if (!debug || !debug.text) {

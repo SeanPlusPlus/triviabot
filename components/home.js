@@ -13,7 +13,8 @@ import Loading from './loading'
 const Home = () => {
   const {
     setQuestion,
-    setLoading
+    setLoading,
+    setDebug,
   } = useContext(GlobalContext)
 
   useEffect(() => {
@@ -23,6 +24,10 @@ const Home = () => {
         '/api/question',
       )
       setQuestion(result.data)
+      console.log('result.data', result.data)
+      if (!result.data.text || !result.data.answers || !result.data.correct) {
+        setDebug(true)
+      }
       setLoading(false)
     }
 

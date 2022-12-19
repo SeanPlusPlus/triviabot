@@ -13,6 +13,7 @@ const Result = () => {
   const handleClick = () => {
     setCorrect(null)
     setLoading(true)
+    setQuestion(null)
     const fetchData = async () => {
       const result = await axios(
         '/api/question',

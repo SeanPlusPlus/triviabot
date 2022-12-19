@@ -34,7 +34,7 @@ const Question = () => {
     })
   }
 
-  if (!question) {
+  if (!question || !question.answers || !question.text) {
     return <></>
   }
 
