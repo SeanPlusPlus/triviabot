@@ -14,10 +14,6 @@ const Question = () => {
   const handleClick = (text, answer) => {
     const response = sha512(text + answer.text)
     response.then((r) => {
-      console.log(answer)
-      console.log(text)
-      console.log(r)
-      console.log(question.correct)
       const s = question.correct === r
       const current = streak
       setCorrect(s)

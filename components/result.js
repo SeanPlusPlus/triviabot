@@ -31,6 +31,7 @@ const Result = () => {
             <span>Incorrect</span>
           </div>
         </div>
+        <p className="mt-4 w-full">try a different option</p>
       </div>
     )
   }

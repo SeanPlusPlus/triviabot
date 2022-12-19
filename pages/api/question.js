@@ -1,7 +1,7 @@
 global.crypto = require('crypto')
 
 export default function handler(req, res) {
-  const text = 'Hello World!!'
+  const text = new Date() + ''
   const answers = [
     {
       text: 'Dude'
