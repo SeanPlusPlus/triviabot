@@ -12,6 +12,11 @@ export default (state, action) => {
         ...state,
         modal: action.payload,
       }
+    case 'UPDATE_QUESTION':
+      return {
+        ...state,
+        question: action.payload,
+      }
     default:
       return state;
   }

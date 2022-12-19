@@ -11,6 +11,7 @@ const { env: { NODE_ENV }} = process
 const initialState = {
   NODE_ENV,
   modal: {},
+  question: null,
 }
 
 export const GlobalContext = createContext(initialState);
@@ -28,6 +29,13 @@ export const GlobalProvider = ({
     });
   }
 
+  function setQuestion(data) {
+    dispatch({
+      type: 'UPDATE_QUESTION',
+      payload: data
+    });
+  }
+
   useEffect(() => {
     log('state', 'rgb(217, 38, 169)', state);
   }, [state])
@@ -36,6 +44,7 @@ export const GlobalProvider = ({
       {
         ...state,
         setModal,
+        setQuestion,
       }
     } > {
       children
