@@ -17,6 +17,11 @@ export default (state, action) => {
         ...state,
         question: action.payload,
       }
+    case 'UPDATE_CORRECT':
+      return {
+        ...state,
+        correct: action.payload,
+      }
     default:
       return state;
   }

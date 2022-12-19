@@ -12,6 +12,7 @@ const initialState = {
   NODE_ENV,
   modal: {},
   question: null,
+  correct: null,
 }
 
 export const GlobalContext = createContext(initialState);
@@ -36,6 +37,13 @@ export const GlobalProvider = ({
     });
   }
 
+  function setCorrect(data) {
+    dispatch({
+      type: 'UPDATE_CORRECT',
+      payload: data
+    });
+  }
+
   useEffect(() => {
     log('state', 'rgb(217, 38, 169)', state);
   }, [state])
@@ -45,6 +53,7 @@ export const GlobalProvider = ({
         ...state,
         setModal,
         setQuestion,
+        setCorrect,
       }
     } > {
       children

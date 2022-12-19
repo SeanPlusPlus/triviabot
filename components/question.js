@@ -1,13 +1,22 @@
 import { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
+import { sha512 } from '../utils/crypto'
 
 const Question = () => {
   const {
     question,
+    setCorrect,
   } = useContext(GlobalContext)
 
-  const handleClick = (answer) => {
-    console.log(answer)
+  const handleClick = (text, answer) => {
+    const response = sha512(text + answer.text)
+    response.then((r) => {
+      console.log(answer)
+      console.log(text)
+      console.log(r)
+      console.log(question.correct)
+      setCorrect(question.correct === r)
+    })
   }
 
   if (!question) {
@@ -21,7 +30,7 @@ const Question = () => {
       </p>
       {question.answers.map((a) => (
         <div key={a.text} className="form-control">
-          <label className="label cursor-pointer hover:bg-base-300 rounded" onClick={() => handleClick(a)}>
+          <label className="label cursor-pointer hover:bg-base-300 rounded" onClick={() => handleClick(question.text, a)}>
             <span className="label-text">{a.text}</span> 
             <input type="radio" name="radio-10" className="radio checked:bg-blue-500" />
           </label>
