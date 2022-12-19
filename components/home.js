@@ -5,6 +5,7 @@ import { GlobalContext } from '../context/GlobalState'
 
 // components
 import Question from './question'
+import Result from './result'
 
 const Home = () => {
   const {
@@ -26,6 +27,7 @@ const Home = () => {
   return (
     <div className="text-center h-screen">
       <Question />
+      <Result />
     </div>
   )
 }
