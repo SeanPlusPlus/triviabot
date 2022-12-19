@@ -12,7 +12,6 @@ import Debug from './debug'
 const Home = () => {
   const {
     setQuestion,
-    setDebug,
   } = useContext(GlobalContext)
 
   useEffect(() => {
@@ -22,7 +21,6 @@ const Home = () => {
       )
 
       setQuestion(result.data)
-      setDebug(result.data.output)
     }
 
     fetchData()

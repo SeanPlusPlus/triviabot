@@ -7,7 +7,6 @@ const Result = () => {
     correct,
     setQuestion,
     setCorrect,
-    setDebug,
   } = useContext(GlobalContext)
 
   const handleClick = () => {
@@ -17,7 +16,6 @@ const Result = () => {
         '/api/question',
       )
       setQuestion(result.data)
-      setDebug(result.data.output)
     }
     fetchData()
   }
