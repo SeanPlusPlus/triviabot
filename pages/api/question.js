@@ -8,6 +8,8 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
+const map = {'A': 0, 'B': 1, 'C': 2, 'D': 3}
+
 const prompt = 'Write a Disney trivia question, provide four responses, three incorrect, and one correct. And then tell me the correct answer.'
 
 const generateQuestion = async (req, res) => {
@@ -19,18 +21,12 @@ const generateQuestion = async (req, res) => {
     max_tokens: 250,
   });
   
-  const output = baseCompletion.data.choices.pop();
-
-  const text = new Date() + ''
-  const answers = [
-    {
-      text: 'Dude' + text
-    },
-    {
-      text: 'Stoked' + text
-    }
-  ]
-  const i = 1
+  const output = baseCompletion.data.choices.pop()
+  const arr = output.text.trim().split('\n\n')
+  const text = arr[0].split('Q: ')[1]
+  const answers = arr[1].split('\n').map((a) => ({text: a}))
+  const answer = arr[2].split('Correct Answer: ')[1][0]
+  const i = map[answer]
   const correct = crypto.createHash('sha512').update(text + answers[i].text).digest('hex')
   const data = {
     text,
