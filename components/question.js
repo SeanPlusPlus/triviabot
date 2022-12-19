@@ -27,7 +27,7 @@ const Question = () => {
   }
 
   return (
-    <div className="mx-10 md:mx-24 lg:mx-48 xl:mx-96 my-5 px-2 py-2 border rounded bg-base-100">
+    <div className="mx-10 md:mx-24 lg:mx-48 xl:mx-96 my-4 px-2 py-2 border rounded bg-base-100">
       <p className="text-left text-lg pb-1 pl-1">
         {question.text}
       </p>
