@@ -8,6 +8,7 @@ const Question = () => {
     setCorrect,
     correct,
     setStreak,
+    streak,
   } = useContext(GlobalContext)
 
   const handleClick = (text, answer) => {
@@ -18,8 +19,9 @@ const Question = () => {
       console.log(r)
       console.log(question.correct)
       const s = question.correct === r
+      const current = streak
       setCorrect(s)
-      setStreak([s])
+      setStreak([...current, s])
     })
   }
 
