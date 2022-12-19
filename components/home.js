@@ -7,10 +7,12 @@ import { GlobalContext } from '../context/GlobalState'
 import Question from './question'
 import Result from './result'
 import Streak from './streak'
+import Debug from './debug'
 
 const Home = () => {
   const {
     setQuestion,
+    setDebug,
   } = useContext(GlobalContext)
 
   useEffect(() => {
@@ -20,6 +22,7 @@ const Home = () => {
       )
 
       setQuestion(result.data)
+      setDebug(result.data.output)
     }
 
     fetchData()
@@ -30,6 +33,7 @@ const Home = () => {
       <Streak />
       <Question />
       <Result />
+      <Debug />
     </div>
   )
 }

@@ -27,6 +27,11 @@ export default (state, action) => {
         ...state,
         streak: action.payload,
       }
+    case 'UPDATE_DEBUG':
+      return {
+        ...state,
+        debug: action.payload,
+      }
     default:
       return state;
   }

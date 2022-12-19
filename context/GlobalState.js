@@ -14,6 +14,7 @@ const initialState = {
   question: null,
   correct: null,
   streak: [],
+  debug: null,
 }
 
 export const GlobalContext = createContext(initialState);
@@ -52,6 +53,13 @@ export const GlobalProvider = ({
     });
   }
 
+  function setDebug(data) {
+    dispatch({
+      type: 'UPDATE_DEBUG',
+      payload: data
+    });
+  }
+
   useEffect(() => {
     log('state', 'rgb(217, 38, 169)', state);
   }, [state])
@@ -63,6 +71,7 @@ export const GlobalProvider = ({
         setQuestion,
         setCorrect,
         setStreak,
+        setDebug,
       }
     } > {
       children
