@@ -10,7 +10,7 @@ const openai = new OpenAIApi(configuration);
 
 const map = {'A': 0, 'B': 1, 'C': 2, 'D': 3}
 
-const prompt = 'Write a Disney trivia question, provide four responses, three incorrect, and one correct. And then tell me the correct answer.'
+const prompt = 'Write a Disney trivia question, provide four responses, label the responses A through D. There shoud be three incorrect, and one correct response. Provide the answer for the correct response.'
 
 const generateQuestion = async (req, res) => {
 
@@ -27,7 +27,7 @@ const generateQuestion = async (req, res) => {
     const arr = output.text.trim().split('\n\n')
     const text = arr[0].split('Q: ')[1]
     const answers = arr[1].split('\n').map((a) => ({text: a}))
-    const answer = arr[2].split('Correct Answer: ')[1][0]
+    const answer = arr[2].split(': ')[1][0]
     const i = map[answer]
     const correct = crypto.createHash('sha512').update(text + answers[i].text).digest('hex')
     data = {
@@ -37,7 +37,7 @@ const generateQuestion = async (req, res) => {
       correct,
     }
   } catch(e) {
-    data = { output }
+    data = { prompt, output }
   }
   res.status(200).json(data)
 }
