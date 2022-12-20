@@ -61,8 +61,12 @@ const Result = () => {
     )
   } else if (displayHighScore) {
     return (
-      <div className="mx-10 md:mx-24 lg:mx-48 xl:mx-96">
-        CONGRATS THIS IS A NEW HIGH SCORE
+      <div className="mx-10 md:mx-24 lg:mx-48 xl:mx-96 mb-4 px-2 py-2 border rounded bg-base-100">
+        <div className="text-2xl">
+          <span className="pr-2" role="img" aria-label="party">🎉</span>
+          NEW HIGH SCORE
+          <span className="pl-2" role="img" aria-label="party">🎉</span>
+        </div>
       </div>
     )
   } else {
