@@ -13,10 +13,9 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const prompt = getPrompt()
-
 const generateQuestion = async (req, res) => {
 
+  const prompt = getPrompt()
   const baseCompletion = await openai.createCompletion({
     model: 'text-davinci-003',
     prompt,

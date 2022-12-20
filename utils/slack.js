@@ -1,6 +1,6 @@
 const getPayload = (data) => {
 	const { text, answers, answer } = data
-	if (!text || !answers || answers.length === 0) {
+	if (!text || !answers || answers.length !== 4) {
 		return {
 			text: JSON.stringify(data)
 		}
