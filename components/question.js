@@ -28,8 +28,9 @@ const Question = () => {
         // TODO Use this logic
         console.log('HIGH SCORE', highScore)
         console.log('STREAK', streak.length)
-        console.log('NEW RECORD', streak.length > highScore)
-        setDisplayHighScore(true)
+        if (streak.length > highScore) {
+          setDisplayHighScore(true)
+        }
       }
     })
   }
