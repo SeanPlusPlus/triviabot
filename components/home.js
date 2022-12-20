@@ -23,18 +23,21 @@ const Home = () => {
       const result = await axios(
         '/api/question',
       )
+
       console.log('');
       console.log('***********');
       console.log(result.data.error);
       console.log(result.data);
       console.log('***********');
-      console.log('');
+      console.log('')
+
+
       if (result.data.error) {
-        setDebug(result.data)
+        fetchData()
       } else {
         setQuestion(result.data)
+        setLoading(false)
       }
-      setLoading(false)
     }
 
     fetchData()

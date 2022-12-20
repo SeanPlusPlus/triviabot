@@ -8,7 +8,6 @@ const Result = () => {
     setQuestion,
     setCorrect,
     setLoading,
-    setDebug,
   } = useContext(GlobalContext)
 
   const handleClick = () => {
@@ -19,11 +18,20 @@ const Result = () => {
       const result = await axios(
         '/api/question',
       )
-      setQuestion(result.data)
-      if (!result.data.text || !result.data.answers || !result.data.correct) {
-        setDebug(result.data)
+
+      console.log('');
+      console.log('***********');
+      console.log(result.data.error);
+      console.log(result.data);
+      console.log('***********');
+      console.log('');
+
+      if (result.data.error) {
+        fetchData()
+      } else {
+        setQuestion(result.data)
+        setLoading(false)
       }
-      setLoading(false)
     }
     fetchData()
   }
