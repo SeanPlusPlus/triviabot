@@ -1,8 +1,42 @@
-const getPayload = (data) => {
+const getPayload = (data, prompt) => {
 	const { text, answers, answer } = data
 	if (!text || !answers || answers.length !== 4) {
 		return {
-			text: JSON.stringify(data)
+			"blocks": [
+				{
+					"type": "header",
+					"text": {
+						"type": "plain_text",
+						"text": " :warning: GPT3 Question Generated but not parsed",
+						"emoji": true
+					}
+				},
+				{
+					"type": "divider"
+				},
+				{
+					"type": "section",
+					"text": {
+						"text": JSON.stringify(data)
+					}
+				},
+				{
+					"type": "divider"
+				},
+				{
+					"type": "section",
+					"fields": [
+						{
+							"type": "mrkdwn",
+							"text": "*Category:*\n" + prompt.category.name
+						},
+						{
+							"type": "mrkdwn",
+							"text": "*Supplement:*\n" + prompt.supplement
+						}
+					]
+				},
+			]
 		}
 	}
 	return {
@@ -11,9 +45,12 @@ const getPayload = (data) => {
 				"type": "header",
 				"text": {
 					"type": "plain_text",
-					"text": "New GPT3 Question Generated",
+					"text": ":white_check_mark: GPT3 Question Generated",
 					"emoji": true
 				}
+			},
+			{
+				"type": "divider"
 			},
 			{
 				"type": "section",
@@ -27,6 +64,9 @@ const getPayload = (data) => {
 						"text": "*Answer:*\n" + answer 
 					},
 				]
+			},
+			{
+				"type": "divider"
 			},
 			{
 				"type": "section",
@@ -51,6 +91,22 @@ const getPayload = (data) => {
 					{
 						"type": "mrkdwn",
 						"text": "*D:*\n" + answers[3].text
+					}
+				]
+			},
+			{
+				"type": "divider"
+			},
+			{
+				"type": "section",
+				"fields": [
+					{
+						"type": "mrkdwn",
+						"text": "*Category:*\n" + prompt.category.name
+					},
+					{
+						"type": "mrkdwn",
+						"text": "*Supplement:*\n" + prompt.supplement
 					}
 				]
 			},

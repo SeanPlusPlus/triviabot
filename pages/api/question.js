@@ -28,7 +28,7 @@ const generateQuestion = async (req, res) => {
   const data = await parseOutput(output.text)
 
   const url = process.env.SLACK_WEB_HOOK_URL
-  const payload = getPayload(data)
+  const payload = getPayload(data, prompt)
   await axios.post(url, payload)
   delete data.answer
   res.status(200).json({...data, prompt})
