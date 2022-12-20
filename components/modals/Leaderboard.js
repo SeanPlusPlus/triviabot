@@ -16,13 +16,13 @@ const Leaderboard = () => {
   }
 
   useEffect(() => {
+    setLoading(true)
     const fetchData = async () => {
       const result = await axios(
         '/api/leaderboard',
       )
       setLoading(false)
       setLeaderboard(result.data)
-      console.log(result.data)
     }
 
     fetchData()
