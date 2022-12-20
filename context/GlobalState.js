@@ -16,6 +16,7 @@ const initialState = {
   streak: [],
   debug: null,
   loading: null,
+  leaderboard: null,
 }
 
 export const GlobalContext = createContext(initialState);
@@ -68,6 +69,13 @@ export const GlobalProvider = ({
     });
   }
 
+  function setLeaderboard(data) {
+    dispatch({
+      type: 'UPDATE_LEADERBOARD',
+      payload: data
+    });
+  }
+
   useEffect(() => {
     log('state', 'rgb(217, 38, 169)', state);
   }, [state])
@@ -81,6 +89,7 @@ export const GlobalProvider = ({
         setStreak,
         setDebug,
         setLoading,
+        setLeaderboard,
       }
     } > {
       children
