@@ -1,10 +1,9 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import { sha512 } from '../utils/crypto'
 import Image from 'next/image'
 
 const Question = () => {
-  const [flag, setFlag] = useState(false)
   const {
     question,
     setCorrect,
@@ -19,18 +18,10 @@ const Question = () => {
       const current = streak
       const s = question.correct === r
       if (s) {
-        setCorrect(s)
-        if (flag) {
-          setFlag(false)
-        } else {
-          setStreak([...current, s])
-        }
+        setCorrect(true)
+        setStreak([...current, s])
       } else {
-        if (!flag) {
-          setCorrect(s)
-          setStreak([...current, s])
-          setFlag(true)
-        }
+        setCorrect(false)
       }
     })
   }

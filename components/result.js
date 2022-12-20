@@ -1,8 +1,11 @@
 import { useContext } from 'react'
+import { useRouter } from 'next/router'
 import axios from 'axios'
 import { GlobalContext } from '../context/GlobalState'
 
 const Result = () => {
+  const router = useRouter()
+
   const {
     correct,
     setQuestion,
@@ -26,6 +29,10 @@ const Result = () => {
       }
     }
     fetchData()
+  }
+
+  const handleRefresh = () => {
+    router.reload(window.location.pathname)
   }
 
   if (correct === null) {
@@ -53,7 +60,7 @@ const Result = () => {
             <span>Incorrect</span>
           </div>
         </div>
-        <p className="mt-4 w-full">try a different option</p>
+        <button className="btn mt-4 w-full" onClick={handleRefresh}>Play Again</button>
       </div>
     )
   }
