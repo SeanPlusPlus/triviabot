@@ -1,7 +1,9 @@
 import { useContext } from 'react'
+import { useRouter } from 'next/router'
 import { GlobalContext } from '../../context/GlobalState'
 
 const Leaderboard = () => {
+  const router = useRouter()
  
   const {
     modal,
@@ -9,6 +11,7 @@ const Leaderboard = () => {
   } = useContext(GlobalContext)
 
   const handleClose= () => {
+    router.push('/')
     setModal({})
   }
 
