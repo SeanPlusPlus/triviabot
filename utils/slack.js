@@ -37,6 +37,9 @@ const getPayload = (data, prompt) => {
 						}
 					]
 				},
+				{
+					"type": "divider"
+				},
 			]
 		}
 	}
@@ -110,6 +113,9 @@ const getPayload = (data, prompt) => {
 						"text": "*Supplement:*\n" + prompt.supplement
 					}
 				]
+			},
+			{
+				"type": "divider"
 			},
 		]
 	}
