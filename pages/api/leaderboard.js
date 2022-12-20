@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     item.json.streak
   ), ['desc']).filter((item) => {
     const streak = _get(item, 'json.streak')
-    return Number.isInteger(streak)
+    return Number.isInteger(streak) && streak > 0
   })
   res.status(200).json(leaderboard)
 }
