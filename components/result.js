@@ -18,14 +18,6 @@ const Result = () => {
       const result = await axios(
         '/api/question',
       )
-
-      console.log('');
-      console.log('***********');
-      console.log(result.data.error);
-      console.log(result.data);
-      console.log('***********');
-      console.log('');
-
       if (result.data.error) {
         fetchData()
       } else {
