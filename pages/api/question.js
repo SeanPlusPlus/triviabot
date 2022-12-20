@@ -15,6 +15,8 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const generateQuestion = async (req, res) => {
+  const { streak } = req.query
+  console.log('streak', streak)
 
   const prompt = getPrompt()
   const baseCompletion = await openai.createCompletion({

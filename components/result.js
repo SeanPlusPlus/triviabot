@@ -11,6 +11,7 @@ const Result = () => {
     setQuestion,
     setCorrect,
     setLoading,
+    streak,
   } = useContext(GlobalContext)
 
   const handleClick = () => {
@@ -19,7 +20,11 @@ const Result = () => {
     setQuestion(null)
     const fetchData = async () => {
       const result = await axios(
-        '/api/question',
+        '/api/question', {
+          params: {
+            streak: streak.length
+          }
+        }
       )
       if (result.data.error) {
         fetchData()
