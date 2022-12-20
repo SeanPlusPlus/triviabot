@@ -32,6 +32,8 @@ const Nav = () => {
                 src="/bot.png"
                 height={40}
                 width={40}
+                loading="eager"
+                priority={true}
               />
             </button>
           </Link>
