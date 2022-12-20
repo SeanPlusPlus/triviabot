@@ -4,6 +4,7 @@ import { parseOutput } from '../../utils/parseOutput'
 import getPrompt from '../../utils/prompt'
 import getPayload from '../../utils/slack'
 
+require('dotenv').config()
 
 global.crypto = require('crypto')
 
