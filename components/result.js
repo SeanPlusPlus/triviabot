@@ -64,8 +64,15 @@ const Result = () => {
       <div className="mx-10 md:mx-24 lg:mx-48 xl:mx-96 mb-4 px-2 py-2 border rounded bg-base-100">
         <div className="text-2xl">
           <span className="pr-2" role="img" aria-label="party">🎉</span>
-          NEW HIGH SCORE
+            NEW HIGH SCORE
           <span className="pl-2" role="img" aria-label="party">🎉</span>
+        </div>
+        <p className="py-2">You can add your name to the leaderboard if you like!!!</p>
+        <div className="mt-2">
+          <input type="text" placeholder="Name" className="input input-bordered w-full max-w-xs" />
+        </div>
+        <div className="mt-2">
+          <button className="btn btn-info  w-full max-w-xs">Submit</button>
         </div>
       </div>
     )
