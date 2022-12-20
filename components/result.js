@@ -5,6 +5,7 @@ import { GlobalContext } from '../context/GlobalState'
 
 const Result = () => {
   const [name, setName] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const router = useRouter()
 
   const {
@@ -46,7 +47,8 @@ const Result = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('name', name);
+    console.log('*** name', name);
+    setIsSubmitting(true)
   }
 
   const handleRefresh = () => {
@@ -80,11 +82,27 @@ const Result = () => {
         <p className="py-2">You can add your name to the leaderboard if you like!!!</p>
         <form onSubmit={handleSubmit}>
           <div className="mt-2">
-            <input type="text" placeholder="Name" className="input input-bordered w-full max-w-xs" onChange={handleChange} value={name} />
+            <input
+              type="text"
+              placeholder="Name"
+              className="input input-bordered w-full max-w-xs"
+              onChange={handleChange}
+              value={name}
+              disabled={isSubmitting}
+            />
           </div>
           <div className="mt-2">
-            <button className="btn btn-info  w-full max-w-xs">Submit</button>
+            <button className="btn btn-info  w-full max-w-xs" disabled={isSubmitting}>
+              Submit
+            </button>
           </div>
+          {isSubmitting && (
+            <div className="lds-loader">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          )}
         </form>
       </div>
     )
