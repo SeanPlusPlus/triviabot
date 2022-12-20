@@ -27,7 +27,7 @@ export const parseOutput = (gpt3output) => {
   // answers
   const answersArr = arr[1].split('\n')
   const answers = answersArr.map((a) => ({text: a}))
-  if (!answers) {
+  if (!answers || answers.length !== 4) {
     return {
       gpt3output,
       arr,

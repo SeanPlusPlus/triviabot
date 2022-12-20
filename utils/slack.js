@@ -1,6 +1,6 @@
 const getPayload = (data, prompt) => {
-	const { text, answers, answer } = data
-	if (!text || !answers || answers.length !== 4) {
+	const { text, answers, answer, error } = data
+	if (error) {
 		return {
 			"blocks": [
 				{
