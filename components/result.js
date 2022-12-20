@@ -16,6 +16,7 @@ const Result = () => {
     streak,
     setHighScore,
     displayHighScore,
+
   } = useContext(GlobalContext)
 
   const handleClick = () => {
@@ -24,11 +25,7 @@ const Result = () => {
     setQuestion(null)
     const fetchData = async () => {
       const result = await axios(
-        '/api/question', {
-          params: {
-            streak: streak.length
-          }
-        }
+        '/api/question'
       )
       if (result.data.error) {
         fetchData()
@@ -45,10 +42,12 @@ const Result = () => {
     setName(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('*** name', name);
     setIsSubmitting(true)
+    await axios.post(
+      '/api/session', { streak: streak.length, name }
+    )
   }
 
   const handleRefresh = () => {
