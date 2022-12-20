@@ -29,4 +29,5 @@ http://localhost:3000/
 - [Tailwind](https://tailwindcss.com/) CSS framework
 - [daisyUI](https://daisyui.com/) Tailwind based component librarary
 - [Fauna](https://fauna.com/) NoSQL datastore
+- [Slack API](https://api.slack.com/) Incoming webhook messaging tool
 - [OpenAI API](https://beta.openai.com/overview) AI text completion
