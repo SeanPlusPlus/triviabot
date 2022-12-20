@@ -1,6 +1,7 @@
 const getPayload = (data, prompt) => {
 	const { text, answers, answer, error } = data
 	if (error) {
+		console.log(prompt);
 		return {
 			"blocks": [
 				{
