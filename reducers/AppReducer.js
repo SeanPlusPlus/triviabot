@@ -42,6 +42,11 @@ export default (state, action) => {
         ...state,
         leaderboard: action.payload,
       }
+    case 'UPDATE_HIGH_SCORE':
+      return {
+        ...state,
+        highScore: action.payload,
+      }
     default:
       return state;
   }

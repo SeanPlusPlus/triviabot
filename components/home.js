@@ -14,6 +14,7 @@ const Home = () => {
   const {
     setQuestion,
     setLoading,
+    setHighScore,
   } = useContext(GlobalContext)
 
   useEffect(() => {
@@ -25,6 +26,8 @@ const Home = () => {
       if (result.data.error) {
         fetchData()
       } else {
+        console.log(result.data);
+        setHighScore(result.data.highScore)
         setQuestion(result.data)
         setLoading(false)
       }

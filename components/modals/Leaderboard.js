@@ -44,7 +44,7 @@ const Leaderboard = () => {
             <div></div>
           </div>
         )}
-        {leaderboard && (
+        {leaderboard && leaderboard.length && (
           <div className="mt-1">
             <table className="table table-zebra w-full">
               <thead>

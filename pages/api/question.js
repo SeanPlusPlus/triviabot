@@ -1,5 +1,8 @@
 import axios from 'axios'
 import { Configuration, OpenAIApi } from 'openai'
+import _orderBy from 'lodash/orderBy'
+import _get from 'lodash/get'
+import getLeaderboard from '../../utils/getLeaderboard'
 import { parseOutput } from '../../utils/parseOutput'
 import getPrompt from '../../utils/prompt'
 import getPayload from '../../utils/slack'
@@ -16,6 +19,13 @@ const openai = new OpenAIApi(configuration);
 
 const generateQuestion = async (req, res) => {
   const prompt = getPrompt()
+  const leaderData = await getLeaderboard()
+  const highScore = _orderBy(leaderData, (item) => (
+    item.json.streak
+  ), ['desc']).filter((item) => {
+    const streak = _get(item, 'json.streak')
+    return Number.isInteger(streak) && streak > 0
+  })[0].json.streak
 
   const debug = true 
 
@@ -30,7 +40,7 @@ const generateQuestion = async (req, res) => {
       ],
       correct: '326520192986d458168497999723e1d692c2dcb585a41a8c4a395926c698637bf65edb80d94c92ac75e6f93939b24c3389faa4ec9490a11153ce1f72e42ea62d'
     }
-    res.status(200).json({...tmp, prompt})
+    res.status(200).json({...tmp, prompt, highScore})
   } else {
     const baseCompletion = await openai.createCompletion({
       model: 'text-davinci-003',
@@ -51,7 +61,7 @@ const generateQuestion = async (req, res) => {
     console.log(prompt)
     console.log('')
 
-    res.status(200).json({...data, prompt})
+    res.status(200).json({...data, prompt, highScore})
   }
 }
 
