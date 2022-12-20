@@ -18,6 +18,7 @@ const initialState = {
   loading: null,
   leaderboard: null,
   highScore: null,
+  displayHighScore: false,
 }
 
 export const GlobalContext = createContext(initialState);
@@ -84,6 +85,13 @@ export const GlobalProvider = ({
     });
   }
 
+  function setDisplayHighScore(data) {
+    dispatch({
+      type: 'UPDATE_SET_DISPLAY_HIGH_SCORE',
+      payload: data
+    });
+  }
+
   useEffect(() => {
     log('state', 'rgb(217, 38, 169)', state);
   }, [state])
@@ -99,6 +107,7 @@ export const GlobalProvider = ({
         setLoading,
         setLeaderboard,
         setHighScore,
+        setDisplayHighScore,
       }
     } > {
       children

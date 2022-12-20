@@ -12,6 +12,8 @@ const Result = () => {
     setCorrect,
     setLoading,
     streak,
+    setHighScore,
+    displayHighScore,
   } = useContext(GlobalContext)
 
   const handleClick = () => {
@@ -29,6 +31,7 @@ const Result = () => {
       if (result.data.error) {
         fetchData()
       } else {
+        setHighScore(result.data.highScore)
         setQuestion(result.data)
         setLoading(false)
       }
@@ -54,6 +57,12 @@ const Result = () => {
           </div>
         </div>
         <button className="btn mt-4 w-full" onClick={handleClick}>Next Question</button>
+      </div>
+    )
+  } else if (displayHighScore) {
+    return (
+      <div className="mx-10 md:mx-24 lg:mx-48 xl:mx-96">
+        CONGRATS THIS IS A NEW HIGH SCORE
       </div>
     )
   } else {

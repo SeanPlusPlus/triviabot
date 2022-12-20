@@ -47,6 +47,11 @@ export default (state, action) => {
         ...state,
         highScore: action.payload,
       }
+    case 'UPDATE_SET_DISPLAY_HIGH_SCORE':
+      return {
+        ...state,
+        displayHighScore: action.payload,
+      }
     default:
       return state;
   }

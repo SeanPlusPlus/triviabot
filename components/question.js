@@ -10,6 +10,8 @@ const Question = () => {
     correct,
     setStreak,
     streak,
+    highScore,
+    setDisplayHighScore,
   } = useContext(GlobalContext)
 
   const handleClick = (text, answer) => {
@@ -22,6 +24,12 @@ const Question = () => {
         setStreak([...current, s])
       } else {
         setCorrect(false)
+
+        // TODO Use this logic
+        console.log('HIGH SCORE', highScore)
+        console.log('STREAK', streak.length)
+        console.log('NEW RECORD', streak.length > highScore)
+        setDisplayHighScore(true)
       }
     })
   }
@@ -49,7 +57,7 @@ const Question = () => {
         <div key={a.text} className="form-control">
           <label className="label cursor-pointer hover:bg-base-300 rounded" onClick={() => handleClick(question.text, a)}>
             <span className="label-text">{a.text}</span> 
-            <input type="radio" name="radio-10" className="radio checked:bg-blue-500" disabled={correct} />
+            <input type="radio" name="radio-10" className="radio checked:bg-blue-500" disabled={correct === true || correct === false} />
           </label>
         </div>
       ))}

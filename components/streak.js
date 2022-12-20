@@ -4,6 +4,7 @@ import { GlobalContext } from '../context/GlobalState'
 const Streak = () => {
   const {
     streak,
+    displayHighScore,
   } = useContext(GlobalContext)
 
   if (streak.length === 0) {
@@ -19,6 +20,9 @@ const Streak = () => {
       {streak.map((s, i) => (
         <div key={i} className="badge badge-success mr-1"></div>
       ))}
+      {displayHighScore && (
+        <div className="badge badge-error"></div>
+      )}
     </div>
   )
 }
