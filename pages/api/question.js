@@ -19,6 +19,8 @@ const openai = new OpenAIApi(configuration);
 
 const generateQuestion = async (req, res) => {
   const prompt = getPrompt()
+
+  // leaderboard
   const leaderData = await getLeaderboard()
   const highScore = _orderBy(leaderData, (item) => (
     item.json.streak
@@ -27,9 +29,13 @@ const generateQuestion = async (req, res) => {
     return Number.isInteger(streak) && streak > 0
   })[0].json.streak
 
-  const debug = true 
+  // debug
+  const debug = false
 
   if (debug) {
+
+    // Use hard-coded debug question 
+
     const tmp = {
       text: 'Q: What is the capital of Egypt?',
       answers: [
@@ -42,6 +48,9 @@ const generateQuestion = async (req, res) => {
     }
     res.status(200).json({...tmp, prompt, highScore})
   } else {
+
+    // Get question from GPT3
+
     const baseCompletion = await openai.createCompletion({
       model: 'text-davinci-003',
       prompt: prompt.text,
