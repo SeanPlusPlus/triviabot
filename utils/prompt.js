@@ -6,30 +6,54 @@ const getPrompt = () => {
       name: 'Disney',
       supplement: [
         'History',
+        'Themes Parks',
+        'Animation',
+        'Movies',
       ]
     },
     {
       name: 'Pixar',
       supplement: [
         'Cars',
+        'Toy Story',
+        'Monsters',
+        'History',
       ]
     },
     {
       name: 'Marvel',
       supplement: [
         'Avengers',
+        'Comics',
+        'Captain America',
+        'Black Panther',
       ]
     },
     {
       name: 'Star Wars',
       supplement: [
         'Episode IV',
+        'Skywalker',
+        'The Empire Strikes Back',
+        'Clone Wars',
       ]
     },
     {
       name: 'National Geographic',
       supplement: [
         'space',
+        'geography',
+        'history',
+        'culture',
+      ]
+    },
+    {
+      name: 'ESPN',
+      supplement: [
+        'NFL',
+        'MLB',
+        'NBA',
+        'College Football',
       ]
     },
   ]
