@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { Configuration, OpenAIApi } from 'openai'
 import { parseOutput } from '../../utils/parseOutput'
+import { getPrompt } from '../../utils/prompt'
 import getPayload from '../../utils/slack'
+
 
 global.crypto = require('crypto')
 
@@ -11,7 +13,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const prompt = 'Write a Disney trivia question, provide four responses, three incorrect, and one correct. And then tell me the correct answer.'
+const prompt = getPrompt()
 
 const generateQuestion = async (req, res) => {
 
