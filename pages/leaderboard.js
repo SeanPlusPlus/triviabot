@@ -1,6 +1,4 @@
 import { useContext, useEffect } from 'react'
-import Link from 'next/link'
-
 import axios from 'axios'
 import { GlobalContext } from '../context/GlobalState'
 import Header from '../components/header'
@@ -26,6 +24,11 @@ export default function Leaderboard() {
 
     fetchData()
   }, []);
+
+  const handleClick = () => {
+    window.location.replace('/')
+  }
+
   return (
     <div className="grid-bg md:h-screen">
       <Header />
@@ -71,11 +74,9 @@ export default function Leaderboard() {
         )}
       </div>
       <div className="mt-5 mx-10 md:mx-24 lg:mx-48 xl:mx-96 pb-80">
-        <Link href="/" className="mt-4 w-full">
-          <button className="btn">
-            Play Again
-          </button>
-        </Link>
+        <button className="btn mt-4 w-full" onClick={handleClick}>
+          Play Again
+        </button>
       </div>
     </div>
   )

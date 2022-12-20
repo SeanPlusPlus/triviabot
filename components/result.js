@@ -48,6 +48,7 @@ const Result = () => {
     await axios.post(
       '/api/session', { streak: streak.length, name }
     )
+    router.push('leaderboard')
   }
 
   const handleRefresh = () => {
