@@ -1,7 +1,6 @@
 const getPayload = (data, prompt) => {
 	const { text, answers, answer, error } = data
 	if (error) {
-		console.log(prompt);
 		return {
 			"blocks": [
 				{
@@ -18,7 +17,8 @@ const getPayload = (data, prompt) => {
 				{
 					"type": "section",
 					"text": {
-						"text": JSON.stringify(data)
+						"type": "mrkdwn",
+						"text": prompt.text
 					}
 				},
 				{
@@ -26,19 +26,10 @@ const getPayload = (data, prompt) => {
 				},
 				{
 					"type": "section",
-					"fields": [
-						{
-							"type": "mrkdwn",
-							"text": "*Category:*\n" + prompt.category.name
-						},
-						{
-							"type": "mrkdwn",
-							"text": "*Supplement:*\n" + prompt.supplement
-						}
-					]
-				},
-				{
-					"type": "divider"
+					"text": {
+						"type": "mrkdwn",
+						"text": data.gpt3output
+					}
 				},
 			]
 		}
@@ -77,11 +68,11 @@ const getPayload = (data, prompt) => {
 				"fields": [
 					{
 						"type": "mrkdwn",
-						"text": "*A:*\n" + answers[0].text
+						"text": answers[0].text
 					},
 					{
 						"type": "mrkdwn",
-						"text": "*B:*\n" + answers[1].text
+						"text": answers[1].text
 					}
 				]
 			},
@@ -90,11 +81,11 @@ const getPayload = (data, prompt) => {
 				"fields": [
 					{
 						"type": "mrkdwn",
-						"text": "*C:*\n" + answers[2].text
+						"text": answers[2].text
 					},
 					{
 						"type": "mrkdwn",
-						"text": "*D:*\n" + answers[3].text
+						"text": answers[3].text
 					}
 				]
 			},
