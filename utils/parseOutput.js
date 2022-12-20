@@ -1,14 +1,15 @@
 global.crypto = require('crypto')
 const map = {'A': 0, 'B': 1, 'C': 2, 'D': 3}
 
-export const parseOutput = (output) => {
+export const parseOutput = (gpt3output) => {
 
   // base array
-  const arr = output.trim().split('\n\n')
+  const arr = gpt3output.trim().split('\n\n')
   if (arr.length < 3) {
     return {
-      output,
+      gpt3output,
       arr,
+      error: true,
     }
   }
     
@@ -16,9 +17,10 @@ export const parseOutput = (output) => {
   const text = arr[0]
   if (!text) {
     return {
-      output,
+      gpt3output,
       arr,
       text,
+      error: true,
     }
   }
 
@@ -27,10 +29,11 @@ export const parseOutput = (output) => {
   const answers = answersArr.map((a) => ({text: a}))
   if (!answers) {
     return {
-      output,
+      gpt3output,
       arr,
       text,
-      answersArr
+      answersArr,
+      error: true,
     }
   }
 
@@ -39,30 +42,32 @@ export const parseOutput = (output) => {
   const answer = answerStr.split(': ')[1][0]
   if (!answer) {
     return {
-      output,
+      gpt3output,
       arr,
       text,
       answers,
       answerStr,
+      error: true,
     }
   }
   
   // correct answer index
   const i = map[answer]
-  if (!i) {
+  if (!Number.isInteger(i)) {
     return {
-      output,
+      gpt3output,
       arr,
       text,
       answers,
       answer,
+      error: true,
     }
   }
 
   // correct answer sha
   const correct = crypto.createHash('sha512').update(text + answers[i].text).digest('hex')
   return {
-    output,
+    gpt3output,
     text,
     answers,
     correct,

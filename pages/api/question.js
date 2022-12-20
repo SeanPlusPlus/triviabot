@@ -9,7 +9,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const prompt = 'Write a Disney trivia question, followed by two newlines. Then provide four responses, label the responses A through D, with each response on it\;s own line. There shoud be three incorrect and one correct response. Provide the answer for the correct response.'
+const prompt = 'Write a Disney trivia question, provide four responses, three incorrect, and one correct. And then tell me the correct answer.'
 
 const generateQuestion = async (req, res) => {
 
