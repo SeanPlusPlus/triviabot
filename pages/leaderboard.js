@@ -35,11 +35,7 @@ export default function Leaderboard() {
       <Nav />
       <div className="mt-5 mx-10 md:mx-24 lg:mx-48 xl:mx-96 px-2 py-2 border rounded bg-base-100">
         {loading ? (
-          <div className="lds-loader">
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
+          <div className="spinner" />
         ) : (
           <>
             <h3 className="mx-3 font-bold text-xl flex">

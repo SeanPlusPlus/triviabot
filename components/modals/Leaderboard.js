@@ -38,11 +38,7 @@ const Leaderboard = () => {
           </span>
         </h3>
         {loading && (
-          <div className="lds-loader">
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
+          <div className="spinner" />
         )}
         {leaderboard && leaderboard.length && (
           <div className="mt-1">

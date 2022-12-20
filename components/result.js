@@ -97,11 +97,7 @@ const Result = () => {
             </button>
           </div>
           {isSubmitting && (
-            <div className="lds-loader">
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
+            <div className="spinner" />
           )}
         </form>
       </div>
