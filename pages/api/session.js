@@ -8,7 +8,6 @@ export default async function handler(req, res) {
     return
   }
   const json = req.body
-  console.log('JSON', json);
   const name = _get(json, 'name')
   const streak = _get(json, 'streak')
   if( (!(Number.isInteger(streak) && streak > 0)) || !name ) {
