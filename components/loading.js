@@ -11,8 +11,12 @@ const Loading = () => {
   }
 
   return (
-    <div className="mx-10 md:mx-24 lg:mx-48 xl:mx-96">
-      <div className="lds-dual-ring"></div>
+    <div className="mx-10 md:mx-24 lg:mx-48 xl:mx-96 mb-4 px-20 py-20 border rounded bg-base-100">
+      <div className="lds-loader">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   )
 
