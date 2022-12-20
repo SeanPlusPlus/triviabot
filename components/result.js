@@ -1,9 +1,10 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { GlobalContext } from '../context/GlobalState'
 
 const Result = () => {
+  const [name, setName] = useState('')
   const router = useRouter()
 
   const {
@@ -39,6 +40,15 @@ const Result = () => {
     fetchData()
   }
 
+  const handleChange = (e) => {
+    setName(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('name', name);
+  }
+
   const handleRefresh = () => {
     router.reload(window.location.pathname)
   }
@@ -68,12 +78,14 @@ const Result = () => {
           <span className="pl-2" role="img" aria-label="party">🎉</span>
         </div>
         <p className="py-2">You can add your name to the leaderboard if you like!!!</p>
-        <div className="mt-2">
-          <input type="text" placeholder="Name" className="input input-bordered w-full max-w-xs" />
-        </div>
-        <div className="mt-2">
-          <button className="btn btn-info  w-full max-w-xs">Submit</button>
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="mt-2">
+            <input type="text" placeholder="Name" className="input input-bordered w-full max-w-xs" onChange={handleChange} value={name} />
+          </div>
+          <div className="mt-2">
+            <button className="btn btn-info  w-full max-w-xs">Submit</button>
+          </div>
+        </form>
       </div>
     )
   } else {
