@@ -23,7 +23,6 @@ const Home = () => {
       const result = await axios(
         '/api/question',
       )
-      setQuestion(result.data)
       console.log('');
       console.log('***********');
       console.log(result.data.error);
@@ -32,6 +31,8 @@ const Home = () => {
       console.log('');
       if (result.data.error) {
         setDebug(result.data)
+      } else {
+        setQuestion(result.data)
       }
       setLoading(false)
     }

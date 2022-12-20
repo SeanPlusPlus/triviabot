@@ -72,5 +72,6 @@ export const parseOutput = (gpt3output) => {
     answers,
     answer,
     correct,
+    error: true,
   }
 }
