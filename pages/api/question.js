@@ -66,10 +66,6 @@ const generateQuestion = async (req, res) => {
     await axios.post(url, payload)
     delete data.answer
 
-    console.log(data)
-    console.log(prompt)
-    console.log('')
-
     res.status(200).json({...data, prompt, highScore})
   }
 }
