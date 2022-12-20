@@ -27,7 +27,6 @@ const Home = () => {
       if (result.data.error) {
         setDebug(result.data)
       }
-      
       setLoading(false)
     }
 

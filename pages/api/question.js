@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Configuration, OpenAIApi } from 'openai'
 import { parseOutput } from '../../utils/parseOutput'
-import { getPrompt } from '../../utils/prompt'
+import getPrompt from '../../utils/prompt'
 import getPayload from '../../utils/slack'
 
 
@@ -18,7 +18,7 @@ const generateQuestion = async (req, res) => {
   const prompt = getPrompt()
   const baseCompletion = await openai.createCompletion({
     model: 'text-davinci-003',
-    prompt,
+    prompt: prompt.text,
     temperature: 0.7,
     max_tokens: 250,
   });
@@ -30,7 +30,7 @@ const generateQuestion = async (req, res) => {
   const payload = getPayload(data)
   await axios.post(url, payload)
   delete data.answer
-  res.status(200).json(data, prompt)
+  res.status(200).json({...data, prompt})
 }
 
 export default generateQuestion
