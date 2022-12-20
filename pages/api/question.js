@@ -15,25 +15,44 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const generateQuestion = async (req, res) => {
-  const { streak } = req.query
-  console.log('streak', streak)
-
   const prompt = getPrompt()
-  const baseCompletion = await openai.createCompletion({
-    model: 'text-davinci-003',
-    prompt: prompt.text,
-    temperature: 0.7,
-    max_tokens: 250,
-  });
-  
-  const output = baseCompletion.data.choices.pop()
-  const data = await parseOutput(output.text)
 
-  const url = process.env.SLACK_WEB_HOOK_URL
-  const payload = getPayload(data, prompt)
-  await axios.post(url, payload)
-  delete data.answer
-  res.status(200).json({...data, prompt})
+  const debug = true 
+
+  if (debug) {
+    const tmp = {
+      text: 'Q: What is the capital of Egypt?',
+      answers: [
+        { text: 'A. Cairo' },
+        { text: 'B. Alexandria' },
+        { text: 'C. Luxor' },
+        { text: 'D. Aswan' }
+      ],
+      correct: '326520192986d458168497999723e1d692c2dcb585a41a8c4a395926c698637bf65edb80d94c92ac75e6f93939b24c3389faa4ec9490a11153ce1f72e42ea62d'
+    }
+    res.status(200).json({...tmp, prompt})
+  } else {
+    const baseCompletion = await openai.createCompletion({
+      model: 'text-davinci-003',
+      prompt: prompt.text,
+      temperature: 0.7,
+      max_tokens: 250,
+    });
+    
+    const output = baseCompletion.data.choices.pop()
+    const data = await parseOutput(output.text)
+
+    const url = process.env.SLACK_WEB_HOOK_URL
+    const payload = getPayload(data, prompt)
+    await axios.post(url, payload)
+    delete data.answer
+
+    console.log(data)
+    console.log(prompt)
+    console.log('')
+
+    res.status(200).json({...data, prompt})
+  }
 }
 
 export default generateQuestion
