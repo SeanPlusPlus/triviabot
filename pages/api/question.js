@@ -1,4 +1,5 @@
-import { Configuration, OpenAIApi } from 'openai';
+import { Configuration, OpenAIApi } from 'openai'
+import { parseOutput } from '../../utils/parseOutput';
 
 global.crypto = require('crypto')
 
@@ -8,9 +9,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const map = {'A': 0, 'B': 1, 'C': 2, 'D': 3}
-
-const prompt = 'Write a Disney trivia question, provide four responses, label the responses A through D. There shoud be three incorrect, and one correct response. Provide the answer for the correct response.'
+const prompt = 'Write a Disney trivia question, followed by two newlines. Then provide four responses, label the responses A through D, with each response on it\;s own line. There shoud be three incorrect and one correct response. Provide the answer for the correct response.'
 
 const generateQuestion = async (req, res) => {
 
@@ -22,24 +21,8 @@ const generateQuestion = async (req, res) => {
   });
   
   const output = baseCompletion.data.choices.pop()
-  let data = { output }
-  try {
-    const arr = output.text.trim().split('\n\n')
-    const text = arr[0].split('Q: ')[1]
-    const answers = arr[1].split('\n').map((a) => ({text: a}))
-    const answer = arr[2].split(': ')[1][0]
-    const i = map[answer]
-    const correct = crypto.createHash('sha512').update(text + answers[i].text).digest('hex')
-    data = {
-      output,
-      text,
-      answers,
-      correct,
-    }
-  } catch(e) {
-    data = { prompt, output }
-  }
-  res.status(200).json(data)
+  const data = await parseOutput(output.text)
+  res.status(200).json(data, prompt)
 }
 
 export default generateQuestion
