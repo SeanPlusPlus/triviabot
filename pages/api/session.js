@@ -8,9 +8,9 @@ export default async function handler(req, res) {
     return
   }
   const json = req.body
+  const name = _get(json, 'name')
   const streak = _get(json, 'streak')
-
-  if(!(Number.isInteger(streak) && streak > 0)) {
+  if( (!(Number.isInteger(streak) && streak > 0)) || !name ) {
     res.status(400).json({
       message: 'no dice'
     })

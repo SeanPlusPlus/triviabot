@@ -58,7 +58,7 @@ const Leaderboard = () => {
                 {leaderboard.map((session, i) => (
                   <tr key={session.session_id}>
                     <th>{i + 1}</th>
-                    <td>{session.session_id}</td>
+                    <td>{session.json.name}</td>
                     <td>{session.json.streak}</td>
                   </tr>
 
