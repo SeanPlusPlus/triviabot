@@ -41,7 +41,10 @@ const generateQuestion = async (req, res) => {
     const rawdata = await fs.readFile(jsonDirectory + '/questions.json', 'utf8')
     const questionsJson = JSON.parse(rawdata).questions
     const rand = _sample(questionsJson)
+
+    // Return cached
     res.status(200).json({rand, prompt, highScore, cache: true})
+    return
   } else {
 
     // Get question from GPT3
@@ -78,7 +81,9 @@ const generateQuestion = async (req, res) => {
       }
     }
 
+    // Return GPT
     res.status(200).json({...data, prompt, highScore})
+    return
   }
 }
 
