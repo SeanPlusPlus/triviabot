@@ -25,7 +25,7 @@ const About = () => {
         </h3>
         <div>
           <p className="pb-4">
-            Hello There! And thanks for stopping by and checking out my Disney AI Trivia Bot, built on the <a className="link text-sky-500" target="_blank" rel="noopener noreferrer" href="https://beta.openai.com/docs/introduction">OpenAI GPT3 API</a>. 
+            Hello There! And thanks for stopping by and checking out my Disney AI Trivia Bot, built on the <a className="link text-sky-500" target="_blank" rel="noopener noreferrer" href="https://beta.openai.com/docs/guides/completion/prompt-design">OpenAI GPT3 API</a>. 
           </p>
           <p className="pb-4">
             Alright let&apos;s get into how this thing works: the webapp server generates a prompt based on a randomly selected Disney brand, submits the prompt to the API, and hopefully gets back a novel - and fun! - trivia question with a set of answers.
