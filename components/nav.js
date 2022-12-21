@@ -16,7 +16,11 @@ const Nav = () => {
   const router = useRouter()
 
   const handleRefresh = () => {
-    router.reload(window.location.pathname)
+    if (router.pathname === '/') {
+      router.reload(window.location.pathname)
+    } else {
+      window.location.href = '/'
+    }
   }
   const handleOpenAbout = () => {
     setModal({about: 'modal-open'})
