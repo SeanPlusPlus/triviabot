@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 const Header = () => {
   const title = 'Trivia Bot'
-  const titleShort = 'Disnay Trivia Powered By GPT3'
+  const titleShort = 'Disnay AI Trivia Powered By GPT3'
   const icon = '/bot.png'
   const url = 'https://triviabot.vercel.app/'
   return (
