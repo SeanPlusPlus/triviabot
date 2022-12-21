@@ -30,4 +30,4 @@ http://localhost:3000/
 - [daisyUI](https://daisyui.com/) Tailwind based component librarary
 - [Fauna](https://fauna.com/) NoSQL datastore
 - [Slack API](https://api.slack.com/) Incoming webhook messaging tool
-- [OpenAI API](https://beta.openai.com/overview) AI text completion
+- [OpenAI API](https://beta.openai.com/docs/guides/completion/prompt-design) AI text completion ⭐️
