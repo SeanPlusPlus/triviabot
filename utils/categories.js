@@ -13,6 +13,9 @@ const categories = [
       'Lion King',
       'Aladin',
       'Frozen',
+      '101 Dalmatians',
+      'Goofy',
+      'Cool Runnings'
     ]
   },
   {
@@ -26,6 +29,10 @@ const categories = [
       'Finding Nemo',
       'Brave',
       'History',
+      'Buzz Lightyear',
+      'Coco',
+      'Up',
+      'Bug\'s Life',
     ]
   },
   {
@@ -39,6 +46,11 @@ const categories = [
       'X-Men',
       'Wolverine',
       'Captain Marvel',
+      'Dr Strange',
+      'Spider-Man',
+      'Thor',
+      'Black Widow',
+      'Hulk',
     ]
   },
   {
@@ -48,10 +60,14 @@ const categories = [
       'Episode V',
       'Episode VI',
       'The Force Awakens',
+      'The Last Jedi',
       'Prequels',
       'Skywalker',
       'The Empire Strikes Back',
       'Clone Wars',
+      'Darth Vader',
+      'Boba Fett',
+      'Obi Wan Kenobi'
     ]
   },
   {
@@ -64,7 +80,11 @@ const categories = [
       'Europe',
       'Africa',
       'Asia',
-      'history',
+      'South America',
+      'medicine',
+      'anthropology',
+      'archeology',
+      'environment',
     ]
   },
   {
@@ -77,6 +97,10 @@ const categories = [
       'WNBA',
       'Golf',
       'Soccer',
+      'Olympics',
+      'History',
+      'Tennis',
+      'Hockey',
     ]
   },
 ]
