@@ -15,6 +15,9 @@ const Question = () => {
   } = useContext(GlobalContext)
 
   const handleClick = (text, answer) => {
+    if (correct === true || correct === false) {
+      return
+    }
     const response = sha512(text + answer.text)
     response.then((r) => {
       const current = streak
