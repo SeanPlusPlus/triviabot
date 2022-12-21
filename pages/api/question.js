@@ -33,27 +33,19 @@ const generateQuestion = async (req, res) => {
     return Number.isInteger(streak) && streak > 0
   })[0].json.streak
 
-  // Get question from cache
   const { cache } = req.query
-
   if (cache) {
+  
+    // Get question from cache
     const jsonDirectory = path.join(process.cwd(), 'data')
     const rawdata = await fs.readFile(jsonDirectory + '/questions.json', 'utf8')
     const questionsJson = JSON.parse(rawdata).questions
     const rand = _sample(questionsJson)
 
-    // console.log(new Date())
-    // console.log('*** Pulling From Cache ***')
-    // console.log('')
-
     // Return cached
     res.status(200).json({...rand, highScore, cache: true})
     return
   } else {
-    
-    // console.log(new Date())
-    // console.log('*** Pulling From OpenAI ***')
-    // console.log('')
 
     // Get question from GPT3
     const baseCompletion = await openai.createCompletion({
@@ -75,8 +67,8 @@ const generateQuestion = async (req, res) => {
     await axios.post(url, payload)
     delete data.answer
 
-    // function for saving a (valid) question to a static json file
-    // note only works when running app locally
+    // Function for saving a (valid) question to a static json file
+    // Note only works when running app locally
     const { save } = req.query
     if (save && !data.error) {
       if (process.env.NODE_ENV === 'development') {
@@ -92,7 +84,7 @@ const generateQuestion = async (req, res) => {
       }
     }
 
-    // Return GPT
+    // Return GPT3
     res.status(200).json({...data, prompt, highScore})
     return
   }
