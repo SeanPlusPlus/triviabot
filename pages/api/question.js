@@ -22,7 +22,6 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const generateQuestion = async (req, res) => {
-  const prompt = getPrompt()
 
   // Get Leaderboard
   const leaderData = await getLeaderboard()
@@ -33,10 +32,13 @@ const generateQuestion = async (req, res) => {
     return Number.isInteger(streak) && streak > 0
   })[0].json.streak
 
+  // Get prompt
+  const prompt = getPrompt()
+
+  // Get question from cache
   const { cache } = req.query
   if (cache) {
   
-    // Get question from cache
     const jsonDirectory = path.join(process.cwd(), 'data')
     const rawdata = await fs.readFile(jsonDirectory + '/questions.json', 'utf8')
     const questionsJson = JSON.parse(rawdata).questions
