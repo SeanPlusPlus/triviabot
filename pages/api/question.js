@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Configuration, OpenAIApi } from 'openai'
 import _orderBy from 'lodash/orderBy'
 import _get from 'lodash/get'
+import fs from 'fs'
 import getLeaderboard from '../../utils/getLeaderboard'
 import { parseOutput } from '../../utils/parseOutput'
 import getPrompt from '../../utils/prompt'
@@ -65,6 +66,18 @@ const generateQuestion = async (req, res) => {
     const payload = getPayload(data, prompt)
     await axios.post(url, payload)
     delete data.answer
+
+    // handy tool for saving a bunch of questions to a file
+    const { save } = req.query
+    if (save && !data.error) {
+      if (process.env.NODE_ENV === 'development') {
+        const path = './data/questions.json'
+        const rawdata = fs.readFileSync(path)
+        const questionsJson = JSON.parse(rawdata).questions
+        const jsonData = JSON.stringify({ questions: [...questionsJson, data]})
+        fs.writeFileSync(path, jsonData)
+      }
+    }
 
     res.status(200).json({...data, prompt, highScore})
   }
