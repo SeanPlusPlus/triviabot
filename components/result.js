@@ -23,19 +23,21 @@ const Result = () => {
     setCorrect(null)
     setLoading(true)
     setQuestion(null)
-    const fetchData = async () => {
-      const result = await axios(
-        '/api/question'
-      )
+    const fetchData = async (cache) => {
+      const url = '/api/question'
+      const result = cache ? await axios(url, { params: {cache: true} }) : await axios(url)
       if (result.data.error) {
-        fetchData()
+        // Second time, get question from cache as we got an error the first time
+        fetchData(true)
       } else {
         setHighScore(result.data.highScore)
         setQuestion(result.data)
         setLoading(false)
       }
     }
-    fetchData()
+
+    // First time, try not fetching from cache to see if realtime openai api works
+    fetchData(false)
   }
 
   const handleChange = (e) => {

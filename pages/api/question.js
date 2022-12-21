@@ -42,10 +42,18 @@ const generateQuestion = async (req, res) => {
     const questionsJson = JSON.parse(rawdata).questions
     const rand = _sample(questionsJson)
 
+    // console.log(new Date())
+    // console.log('*** Pulling From Cache ***')
+    // console.log('')
+
     // Return cached
-    res.status(200).json({rand, prompt, highScore, cache: true})
+    res.status(200).json({...rand, prompt, highScore, cache: true})
     return
   } else {
+    
+    // console.log(new Date())
+    // console.log('*** Pulling From OpenAI ***')
+    // console.log('')
 
     // Get question from GPT3
     const baseCompletion = await openai.createCompletion({
@@ -76,6 +84,9 @@ const generateQuestion = async (req, res) => {
         const jsonDirectory = path.join(process.cwd(), 'data')
         const rawdata = await fs.readFile(jsonDirectory + '/questions.json', 'utf8')
         const questionsJson = JSON.parse(rawdata).questions
+
+        // console.log('*** Total in Cache:', questionsJson.length + 1) 
+  
         const jsonData = JSON.stringify({ questions: [...questionsJson, data]})
         await fs.writeFile('./data/questions.json', jsonData)
       }
