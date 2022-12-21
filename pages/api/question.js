@@ -24,7 +24,7 @@ const openai = new OpenAIApi(configuration);
 const generateQuestion = async (req, res) => {
   const prompt = getPrompt()
 
-  // leaderboard
+  // Get Leaderboard
   const leaderData = await getLeaderboard()
   const highScore = _orderBy(leaderData, (item) => (
     item.json.streak
@@ -33,24 +33,18 @@ const generateQuestion = async (req, res) => {
     return Number.isInteger(streak) && streak > 0
   })[0].json.streak
 
-  // get question from cache
+  // Get question from cache
   const { cache } = req.query
 
   if (cache) {
-
-    // Use hard-coded debug question 
     const jsonDirectory = path.join(process.cwd(), 'data')
     const rawdata = await fs.readFile(jsonDirectory + '/questions.json', 'utf8')
     const questionsJson = JSON.parse(rawdata).questions
     const rand = _sample(questionsJson)
-
-    console.log('getting from cache!!!')
-
-    res.status(200).json({rand, prompt, highScore})
+    res.status(200).json({rand, prompt, highScore, cache: true})
   } else {
 
     // Get question from GPT3
-
     const baseCompletion = await openai.createCompletion({
       model: 'text-davinci-003',
       prompt: prompt.text,
@@ -58,15 +52,20 @@ const generateQuestion = async (req, res) => {
       max_tokens: 250,
     });
     
+    // The question object
     const output = baseCompletion.data.choices.pop()
+
+    // Parse questions
     const data = await parseOutput(output.text)
 
+    // Send to Slack
     const url = process.env.SLACK_WEB_HOOK_URL
     const payload = getPayload(data, prompt)
     await axios.post(url, payload)
     delete data.answer
 
-    // handy tool for saving a bunch of questions to a file when running local
+    // function for saving a (valid) question to a static json file
+    // note only works when running app locally
     const { save } = req.query
     if (save && !data.error) {
       if (process.env.NODE_ENV === 'development') {
@@ -74,9 +73,6 @@ const generateQuestion = async (req, res) => {
         const jsonDirectory = path.join(process.cwd(), 'data')
         const rawdata = await fs.readFile(jsonDirectory + '/questions.json', 'utf8')
         const questionsJson = JSON.parse(rawdata).questions
-
-        console.log('Total Saved:', questionsJson.length)
-
         const jsonData = JSON.stringify({ questions: [...questionsJson, data]})
         await fs.writeFile('./data/questions.json', jsonData)
       }
