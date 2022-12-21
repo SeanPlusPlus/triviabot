@@ -2,7 +2,10 @@ import axios from 'axios'
 import { Configuration, OpenAIApi } from 'openai'
 import _orderBy from 'lodash/orderBy'
 import _get from 'lodash/get'
-import fs from 'fs'
+import _sample from 'lodash/sample'
+import { promises as fs } from 'fs'
+import path from 'path'
+
 import getLeaderboard from '../../utils/getLeaderboard'
 import { parseOutput } from '../../utils/parseOutput'
 import getPrompt from '../../utils/prompt'
@@ -30,24 +33,20 @@ const generateQuestion = async (req, res) => {
     return Number.isInteger(streak) && streak > 0
   })[0].json.streak
 
-  // debug
-  const debug = false
+  // get question from cache
+  const { cache } = req.query
 
-  if (debug) {
+  if (cache) {
 
     // Use hard-coded debug question 
+    const jsonDirectory = path.join(process.cwd(), 'data')
+    const rawdata = await fs.readFile(jsonDirectory + '/questions.json', 'utf8')
+    const questionsJson = JSON.parse(rawdata).questions
+    const rand = _sample(questionsJson)
 
-    const tmp = {
-      text: 'Q: What is the capital of Egypt?',
-      answers: [
-        { text: 'A. Cairo' },
-        { text: 'B. Alexandria' },
-        { text: 'C. Luxor' },
-        { text: 'D. Aswan' }
-      ],
-      correct: '326520192986d458168497999723e1d692c2dcb585a41a8c4a395926c698637bf65edb80d94c92ac75e6f93939b24c3389faa4ec9490a11153ce1f72e42ea62d'
-    }
-    res.status(200).json({...tmp, prompt, highScore})
+    console.log('getting from cache!!!')
+
+    res.status(200).json({rand, prompt, highScore})
   } else {
 
     // Get question from GPT3
@@ -67,15 +66,19 @@ const generateQuestion = async (req, res) => {
     await axios.post(url, payload)
     delete data.answer
 
-    // handy tool for saving a bunch of questions to a file
+    // handy tool for saving a bunch of questions to a file when running local
     const { save } = req.query
     if (save && !data.error) {
       if (process.env.NODE_ENV === 'development') {
-        const path = './data/questions.json'
-        const rawdata = fs.readFileSync(path)
+
+        const jsonDirectory = path.join(process.cwd(), 'data')
+        const rawdata = await fs.readFile(jsonDirectory + '/questions.json', 'utf8')
         const questionsJson = JSON.parse(rawdata).questions
+
+        console.log('Total Saved:', questionsJson.length)
+
         const jsonData = JSON.stringify({ questions: [...questionsJson, data]})
-        fs.writeFileSync(path, jsonData)
+        await fs.writeFile('./data/questions.json', jsonData)
       }
     }
 
