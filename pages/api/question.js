@@ -47,7 +47,7 @@ const generateQuestion = async (req, res) => {
     // console.log('')
 
     // Return cached
-    res.status(200).json({...rand, prompt, highScore, cache: true})
+    res.status(200).json({...rand, highScore, cache: true})
     return
   } else {
     
@@ -87,7 +87,7 @@ const generateQuestion = async (req, res) => {
 
         console.log('*** Total in Cache:', questionsJson.length + 1) 
   
-        const jsonData = JSON.stringify({ questions: [...questionsJson, data]})
+        const jsonData = JSON.stringify({ questions: [...questionsJson, {...data, prompt}]})
         await fs.writeFile('./data/questions.json', jsonData)
       }
     }
