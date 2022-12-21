@@ -71,7 +71,7 @@ export default function Leaderboard() {
       </div>
       <div className="mt-5 mx-10 md:mx-24 lg:mx-48 xl:mx-96 pb-80">
         <button className="btn mt-4 w-full" onClick={handleClick}>
-          Play Again
+          Back to home
         </button>
       </div>
     </div>
