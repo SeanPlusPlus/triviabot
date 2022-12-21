@@ -85,7 +85,7 @@ const generateQuestion = async (req, res) => {
         const rawdata = await fs.readFile(jsonDirectory + '/questions.json', 'utf8')
         const questionsJson = JSON.parse(rawdata).questions
 
-        // console.log('*** Total in Cache:', questionsJson.length + 1) 
+        console.log('*** Total in Cache:', questionsJson.length + 1) 
   
         const jsonData = JSON.stringify({ questions: [...questionsJson, data]})
         await fs.writeFile('./data/questions.json', jsonData)
