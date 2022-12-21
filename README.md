@@ -4,6 +4,8 @@ Disney AI GPT3 Trivia Bot
 
 https://triviabot.vercel.app/
 
+![bot](https://triviabot.vercel.app/bot.png)
+
 ---
 
 ## Dev Instructions
