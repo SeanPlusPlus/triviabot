@@ -28,10 +28,10 @@ const About = () => {
             Hello There! And thanks for stopping by and checking out my Disney AI Trivia Bot, built on the <a className="link text-sky-500" target="_blank" rel="noopener noreferrer" href="https://beta.openai.com/docs/introduction">OpenAI GPT3 API</a>. 
           </p>
           <p className="pb-4">
-            This is how it works: the webapp server generates a prompt based on a randomly selected Disney brand, submits the prompt to the API, and hopefully gets back a novel - and fun! - trivia question with a set of answers.
+            Alright let&apos;s get into how this thing works: the webapp server generates a prompt based on a randomly selected Disney brand, submits the prompt to the API, and hopefully gets back a novel - and fun! - trivia question with a set of answers.
           </p>
           <p className="pb-4">
-            Leveraging six of the most prominent Disney properties, the game is a straightforward example of engineering on-the-fly AI prompts, and parsing the output.
+            Leveraging six of the most prominent Disney properties, the game is a straightforward example of engineering on-the-fly AI prompts, parsing the output from the AI, and building an interactive game on the output data.
           </p>
           <p className="pb-4">
             These here are the six brands that I use to generate different categories of prompts for the AI:
