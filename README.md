@@ -1,6 +1,6 @@
 # Trivia Bot
 
-Disney AI GPT3 Trivia Bot
+Disney AI GPT3 Powered Trivia Bot
 
 https://triviabot.vercel.app/
 
